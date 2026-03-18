@@ -18,7 +18,9 @@ const CreateProduct = () => {
     const fetchCategories = async () => {
       try {
         setFetchingCategories(true);
-        const response = await fetch("http://localhost:8000/api/blogcategory");
+        const response = await fetch(
+          "https://eduhawk-server-urpn.onrender.com/api/blogcategory",
+        );
 
         if (!response.ok) {
           throw new Error("Failed to load categories");

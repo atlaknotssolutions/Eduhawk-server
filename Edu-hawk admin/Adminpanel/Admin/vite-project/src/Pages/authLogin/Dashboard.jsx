@@ -58,19 +58,23 @@ const Dashboard = () => {
           techCategoriesRes,
         ] = await Promise.all([
           axios
-            .get("http://localhost:8000/api/users")
+            .get("https://eduhawk-server-urpn.onrender.com/api/users")
             .catch(() => ({ data: null })),
           axios
-            .get("http://localhost:8000/query")
+            .get("https://eduhawk-server-urpn.onrender.com/query")
             .catch(() => ({ data: null })),
           axios
-            .get("http://localhost:8000/api/contact")
+            .get("https://eduhawk-server-urpn.onrender.com/api/contact")
             .catch(() => ({ data: null })),
           axios
-            .get("http://localhost:8000/api/technology/product")
+            .get(
+              "https://eduhawk-server-urpn.onrender.com/api/technology/product",
+            )
             .catch(() => ({ data: null })),
           axios
-            .get("http://localhost:8000/api/technology/category")
+            .get(
+              "https://eduhawk-server-urpn.onrender.com/api/technology/category",
+            )
             .catch(() => ({ data: null })),
         ]);
 

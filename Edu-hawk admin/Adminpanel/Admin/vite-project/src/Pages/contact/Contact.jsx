@@ -1,14 +1,12 @@
-
-
 // import React, { useState, useEffect } from "react";
 // import axios from "axios";
 // import DataTable from "react-data-table-component";
-// import { 
-//   FaEye, 
-//   FaTrashAlt, 
-//   FaSearch, 
-//   FaSyncAlt, 
-//   FaInbox 
+// import {
+//   FaEye,
+//   FaTrashAlt,
+//   FaSearch,
+//   FaSyncAlt,
+//   FaInbox
 // } from "react-icons/fa";
 // import { IoMdClose } from "react-icons/io";
 
@@ -128,7 +126,7 @@
 //     try {
 //       setLoading(true);
 //       setError(null);
-//       const res = await axios.get("http://localhost:8000/api/contact");
+//       const res = await axios.get("https://eduhawk-server-urpn.onrender.com/api/contact");
 //       const contacts = Array.isArray(res.data) ? res.data : res.data?.data || [];
 //       setData(contacts);
 //     } catch (err) {
@@ -148,7 +146,7 @@
 
 //     setDeletingId(id);
 //     try {
-//       await axios.delete(`http://localhost:8000/api/contact/${id}`);
+//       await axios.delete(`https://eduhawk-server-urpn.onrender.com/api/contact/${id}`);
 //       setData((prev) => prev.filter((item) => item._id !== id));
 //       alert("Message deleted successfully");
 //     } catch (err) {
@@ -323,14 +321,29 @@
 
 // export default Contact;
 
-import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
-import ReCAPTCHA from 'react-google-recaptcha';
+import React, { useState, useRef } from "react";
+import { motion } from "framer-motion";
+import ReCAPTCHA from "react-google-recaptcha";
 
-const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.3 } } };
-const itemVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7 } } };
-const slideLeft = { hidden: { opacity: 0, x: -80 }, visible: { opacity: 1, x: 0, transition: { duration: 0.9 } } };
-const slideRight = { hidden: { opacity: 0, x: 80 }, visible: { opacity: 1, x: 0, transition: { duration: 0.9 } } };
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.3 },
+  },
+};
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+};
+const slideLeft = {
+  hidden: { opacity: 0, x: -80 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.9 } },
+};
+const slideRight = {
+  hidden: { opacity: 0, x: 80 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.9 } },
+};
 
 const eventTypes = [
   "CorporateEvent",
@@ -338,63 +351,93 @@ const eventTypes = [
   "Exhibition",
   "Conference",
   "Political/Govt",
-  "Other"
+  "Other",
 ];
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    subject: 'Other',
-    message: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    subject: "Other",
+    message: "",
   });
 
-  const [status, setStatus] = useState({ loading: false, message: '', error: false });
+  const [status, setStatus] = useState({
+    loading: false,
+    message: "",
+    error: false,
+  });
   const recaptchaRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus({ loading: true, message: '', error: false });
+    setStatus({ loading: true, message: "", error: false });
 
     const captchaToken = recaptchaRef.current?.getValue();
     if (!captchaToken) {
-      setStatus({ loading: false, message: 'Please complete the reCAPTCHA', error: true });
+      setStatus({
+        loading: false,
+        message: "Please complete the reCAPTCHA",
+        error: true,
+      });
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/contact/create', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: `${formData.firstName} ${formData.lastName}`.trim(),
-          email: formData.email,
-          phone: formData.phone || undefined,
-          subject: formData.subject,
-          message: formData.message,
-          captcha: captchaToken,
-        }),
-      });
+      const response = await fetch(
+        "https://eduhawk-server-urpn.onrender.com/api/contact/create",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: `${formData.firstName} ${formData.lastName}`.trim(),
+            email: formData.email,
+            phone: formData.phone || undefined,
+            subject: formData.subject,
+            message: formData.message,
+            captcha: captchaToken,
+          }),
+        },
+      );
 
       const data = await response.json();
 
       if (response.ok) {
-        setStatus({ loading: false, message: 'Thank you! Your message has been sent successfully.', error: false });
-        setFormData({ firstName: '', lastName: '', email: '', phone: '', subject: 'Other', message: '' });
+        setStatus({
+          loading: false,
+          message: "Thank you! Your message has been sent successfully.",
+          error: false,
+        });
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          subject: "Other",
+          message: "",
+        });
         recaptchaRef.current?.reset();
       } else {
-        setStatus({ loading: false, message: data.message || 'Failed to send message.', error: true });
+        setStatus({
+          loading: false,
+          message: data.message || "Failed to send message.",
+          error: true,
+        });
       }
     } catch (err) {
       console.error(err);
-      setStatus({ loading: false, message: 'Network error. Please check your connection.', error: true });
+      setStatus({
+        loading: false,
+        message: "Network error. Please check your connection.",
+        error: true,
+      });
     }
   };
 
@@ -407,8 +450,8 @@ const Contact = () => {
         className="relative h-[500px] bg-cover bg-center flex items-center justify-center"
         style={{
           backgroundImage: "url('/Images/Contact Us/student.jpg')",
-          backgroundBlendMode: 'multiply',
-          backgroundColor: 'rgba(0,0,0,0.55)',
+          backgroundBlendMode: "multiply",
+          backgroundColor: "rgba(0,0,0,0.55)",
         }}
       >
         <motion.h1 className="text-6xl md:text-8xl font-bold text-white tracking-wider drop-shadow-2xl">
@@ -425,54 +468,108 @@ const Contact = () => {
       >
         <div className="container mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-
             {/* Form */}
-            <motion.div variants={slideLeft} className="bg-white rounded-2xl shadow-xl p-8 lg:p-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#02145a] mb-6">Get In Touch</h2>
-              <p className="text-gray-600 mb-8">We're here to assist you with any event inquiry.</p>
+            <motion.div
+              variants={slideLeft}
+              className="bg-white rounded-2xl shadow-xl p-8 lg:p-10"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-[#02145a] mb-6">
+                Get In Touch
+              </h2>
+              <p className="text-gray-600 mb-8">
+                We're here to assist you with any event inquiry.
+              </p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                    <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#02145a] outline-none" />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#02145a] outline-none"
+                    />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                    <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#02145a] outline-none" />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#02145a] outline-none"
+                    />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#02145a] outline-none" />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#02145a] outline-none"
+                    />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#02145a] outline-none" />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#02145a] outline-none"
+                    />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Event Type</label>
-                  <select name="subject" value={formData.subject} onChange={handleChange} required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#02145a] outline-none">
-                    {eventTypes.map(type => (
-                      <option key={type} value={type}>{type}</option>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Event Type
+                  </label>
+                  <select
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#02145a] outline-none"
+                  >
+                    {eventTypes.map((type) => (
+                      <option key={type} value={type}>
+                        {type}
+                      </option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                  <textarea name="message" rows={5} value={formData.message} onChange={handleChange} required
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Message
+                  </label>
+                  <textarea
+                    name="message"
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#02145a] outline-none resize-none"
-                    placeholder="Tell us about your event..." />
+                    placeholder="Tell us about your event..."
+                  />
                 </div>
 
                 <div className="flex justify-center md:justify-start pt-4">
@@ -484,7 +581,9 @@ const Contact = () => {
                 </div>
 
                 {status.message && (
-                  <p className={`text-center font-medium ${status.error ? 'text-red-600' : 'text-green-600'}`}>
+                  <p
+                    className={`text-center font-medium ${status.error ? "text-red-600" : "text-green-600"}`}
+                  >
                     {status.message}
                   </p>
                 )}
@@ -493,18 +592,24 @@ const Contact = () => {
                   type="submit"
                   disabled={status.loading}
                   className={`w-full bg-[#02145a] text-white py-4 rounded-lg font-semibold text-lg transition-all
-                    ${status.loading ? 'cursor-not-allowed bg-[#0f3a9e]' : 'hover:bg-[#0a2a8c]'}`}
+                    ${status.loading ? "cursor-not-allowed bg-[#0f3a9e]" : "hover:bg-[#0a2a8c]"}`}
                 >
-                  {status.loading ? 'Sending...' : 'Send Message'}
+                  {status.loading ? "Sending..." : "Send Message"}
                 </button>
               </form>
             </motion.div>
 
             {/* Right Side - Info + Map */}
-            <motion.div variants={slideRight} className="bg-white rounded-2xl shadow-xl p-8 lg:p-10">
-              <h3 className="text-2xl font-bold text-[#02145a] mb-4">Our Main Office</h3>
+            <motion.div
+              variants={slideRight}
+              className="bg-white rounded-2xl shadow-xl p-8 lg:p-10"
+            >
+              <h3 className="text-2xl font-bold text-[#02145a] mb-4">
+                Our Main Office
+              </h3>
               <p className="text-gray-700 mb-6">
-                Ujjain, Madhya Pradesh<br />
+                Ujjain, Madhya Pradesh
+                <br />
                 Grand Sameer Events
               </p>
 
@@ -512,14 +617,30 @@ const Contact = () => {
                 {/* Replace with your actual Ujjain location iframe if needed */}
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.036366105497!2d77.22180577549842!3d28.568670675699693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce25b6c992ab9%3A0x87fbc9cb56be469a!2sBajrang%20House%2C%20N-5%2C%20next%20to%20Aakash%20Institute%2C%20South%20Extension%20I%2C%20Block%20N%2C%20New%20Delhi%2C%20Delhi%20110003!5e0!3m2!1sen!2sin!4v1773053734632!5m2!1sen!2sin"
-                  width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy" />
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                />
               </div>
 
-              <h5 className="text-xl font-semibold text-[#02145a] mb-4">Quick Contact</h5>
+              <h5 className="text-xl font-semibold text-[#02145a] mb-4">
+                Quick Contact
+              </h5>
               <ul className="space-y-3 text-gray-700">
-                <li className="flex items-center"><i className="fa-solid fa-phone mr-3 text-[#02145a]"></i> +91-76329 49984</li>
-                <li className="flex items-center"><i className="fa-solid fa-envelope mr-3 text-[#02145a]"></i> info@grandsameerevents.com</li>
-                <li className="flex items-center"><i className="fa-solid fa-location-dot mr-3 text-[#02145a]"></i> Ujjain, Madhya Pradesh</li>
+                <li className="flex items-center">
+                  <i className="fa-solid fa-phone mr-3 text-[#02145a]"></i>{" "}
+                  +91-76329 49984
+                </li>
+                <li className="flex items-center">
+                  <i className="fa-solid fa-envelope mr-3 text-[#02145a]"></i>{" "}
+                  info@grandsameerevents.com
+                </li>
+                <li className="flex items-center">
+                  <i className="fa-solid fa-location-dot mr-3 text-[#02145a]"></i>{" "}
+                  Ujjain, Madhya Pradesh
+                </li>
               </ul>
             </motion.div>
           </div>

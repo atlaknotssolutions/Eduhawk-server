@@ -1,7 +1,7 @@
 // // import { useState, useEffect, useCallback } from "react";
 // // import DataTable from "react-data-table-component";
 
-// // const API = "http://localhost:8000/api/query/all";
+// // const API = "https://eduhawk-server-urpn.onrender.com/api/query/all";
 
 // // const EVENT_COLORS = {
 // //   CorporateEvent: { bg: "#e0f2fe", text: "#0369a1", border: "#7dd3fc" },
@@ -262,7 +262,6 @@
 // //       width: "170px",
 // //       cell: (r) => <Badge label={r.subject} />,
 // //     },
-
 
 // //         {
 // //       name: "Country",
@@ -531,12 +530,10 @@
 // //   );
 // // }
 
-
-
 // import { useState, useEffect, useCallback } from "react";
 // import DataTable from "react-data-table-component";
 
-// const API = "http://localhost:8000/api/query/all";
+// const API = "https://eduhawk-server-urpn.onrender.com/api/query/all";
 
 // const EVENT_COLORS = {
 //   CorporateEvent: { bg: "#e0f2fe", text: "#0369a1", border: "#7dd3fc" },
@@ -767,7 +764,7 @@
 //     if (!window.confirm("Delete this message permanently?")) return;
 //     setDeletingId(id);
 //     try {
-//       const res = await fetch(`http://localhost:8000/api/query/${id}`, { method: "DELETE" });
+//       const res = await fetch(`https://eduhawk-server-urpn.onrender.com/api/query/${id}`, { method: "DELETE" });
 //       if (!res.ok) throw new Error("Delete failed");
 //       setData((prev) => prev.filter((r) => r._id !== id));
 //     } catch (err) {
@@ -886,7 +883,6 @@
 //       }}>
 //         <div style={{ maxWidth: 1480, margin: "0 auto" }}>
 //           {/* Header */}
-  
 
 //           {/* Event Filter Chips */}
 //           <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 32 }}>
@@ -1020,11 +1016,10 @@
 //   );
 // }
 
-
 // import { useState, useEffect, useCallback } from "react";
 // import DataTable from "react-data-table-component";
 
-// const API = "http://localhost:8000/api/query/all";
+// const API = "https://eduhawk-server-urpn.onrender.com/api/query/all";
 
 // const EVENT_COLORS = {
 //   CorporateEvent: { bg: "#e0f2fe", text: "#0369a1", border: "#7dd3fc" },
@@ -1242,7 +1237,7 @@
 //     if (!window.confirm("Delete this message permanently?")) return;
 //     setDeletingId(id);
 //     try {
-//       const res = await fetch(`http://localhost:8000/api/query/${id}`, { method: "DELETE" });
+//       const res = await fetch(`https://eduhawk-server-urpn.onrender.com/api/query/${id}`, { method: "DELETE" });
 //       if (!res.ok) throw new Error("Delete failed");
 //       setData((prev) => prev.filter((r) => r._id !== id));
 //     } catch (err) {
@@ -1268,25 +1263,25 @@
 
 //   const columns = [
 //     { name: "#", selector: (_, i) => i + 1, width: "60px", cell: (_, i) => <span style={{ color: "#94a3b8", fontWeight: 600, fontSize: 13.5 }}>{i + 1}</span> },
-//     { 
-//       name: "Name", 
-//       selector: (r) => r.name || r.username, 
-//       sortable: true, 
-//       cell: (r) => <span style={{ fontWeight: 600, color: "#0f172a" }}>{r.name || r.username}</span> 
+//     {
+//       name: "Name",
+//       selector: (r) => r.name || r.username,
+//       sortable: true,
+//       cell: (r) => <span style={{ fontWeight: 600, color: "#0f172a" }}>{r.name || r.username}</span>
 //     },
-//     { 
-//       name: "Email", 
-//       selector: (r) => r.email, 
-//       sortable: true, 
-//       cell: (r) => <a href={`mailto:${r.email}`} style={{ color: "#2563eb", textDecoration: "none" }}>{r.email}</a> 
+//     {
+//       name: "Email",
+//       selector: (r) => r.email,
+//       sortable: true,
+//       cell: (r) => <a href={`mailto:${r.email}`} style={{ color: "#2563eb", textDecoration: "none" }}>{r.email}</a>
 //     },
 //     { name: "Phone", selector: (r) => r.phone || "—", width: "140px" },
-//     { 
-//       name: "Event Type", 
-//       selector: (r) => r.subject, 
-//       sortable: true, 
-//       width: "175px", 
-//       cell: (r) => <Badge label={r.subject || "Other"} /> 
+//     {
+//       name: "Event Type",
+//       selector: (r) => r.subject,
+//       sortable: true,
+//       width: "175px",
+//       cell: (r) => <Badge label={r.subject || "Other"} />
 //     },
 //     { name: "City", selector: (r) => r.city || "—", sortable: true, width: "130px" },
 //     { name: "Country", selector: (r) => r.country || "—", sortable: true, width: "130px" },
@@ -1372,7 +1367,6 @@
 //         <div style={{ maxWidth: 1480, margin: "0 auto" }}>
 
 //           {/* Header */}
-    
 
 //           {/* Event Filter Chips */}
 //           <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 32 }}>
@@ -1508,30 +1502,32 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import DataTable from "react-data-table-component";
-import { 
-  FaEye, 
-  FaTrashAlt, 
-  FaSearch, 
-  FaSyncAlt, 
-  FaInbox 
+import {
+  FaEye,
+  FaTrashAlt,
+  FaSearch,
+  FaSyncAlt,
+  FaInbox,
 } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 
-const API = "http://localhost:8000/api/query/all";
+const API = "https://eduhawk-server-urpn.onrender.com/api/query/all";
 
 const EVENT_COLORS = {
   CorporateEvent: "bg-sky-100 text-sky-700 border-sky-200",
-  Wedding:        "bg-pink-100 text-pink-700 border-pink-200",
-  Exhibition:     "bg-yellow-100 text-amber-700 border-yellow-200",
-  Conference:     "bg-violet-100 text-violet-700 border-violet-200",
+  Wedding: "bg-pink-100 text-pink-700 border-pink-200",
+  Exhibition: "bg-yellow-100 text-amber-700 border-yellow-200",
+  Conference: "bg-violet-100 text-violet-700 border-violet-200",
   "Political/Govt": "bg-emerald-100 text-emerald-700 border-emerald-200",
-  Other:          "bg-gray-100 text-gray-700 border-gray-200",
+  Other: "bg-gray-100 text-gray-700 border-gray-200",
 };
 
 const Badge = ({ label }) => {
   const colorClass = EVENT_COLORS[label] || EVENT_COLORS.Other;
   return (
-    <span className={`inline-flex items-center px-4 py-1 text-xs font-semibold rounded-full border ${colorClass}`}>
+    <span
+      className={`inline-flex items-center px-4 py-1 text-xs font-semibold rounded-full border ${colorClass}`}
+    >
       {label || "Other"}
     </span>
   );
@@ -1570,7 +1566,9 @@ const MessageModal = ({ row, onClose }) => {
 
         {/* Message Body */}
         <div className="p-8">
-          <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">Message</p>
+          <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
+            Message
+          </p>
           <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 text-gray-700 leading-relaxed min-h-[140px]">
             {row.message || row.query || "No message provided."}
           </div>
@@ -1579,7 +1577,8 @@ const MessageModal = ({ row, onClose }) => {
         {/* Footer */}
         <div className="px-8 py-5 bg-gray-50 border-t text-sm text-gray-500 flex justify-between">
           <span>
-            Received: {new Date(row.createdAt).toLocaleDateString("en-IN", {
+            Received:{" "}
+            {new Date(row.createdAt).toLocaleDateString("en-IN", {
               day: "numeric",
               month: "short",
               year: "numeric",
@@ -1610,7 +1609,7 @@ const Query = () => {
       const res = await fetch(API);
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
       const json = await res.json();
-      setData(Array.isArray(json) ? json : json.data ?? []);
+      setData(Array.isArray(json) ? json : (json.data ?? []));
     } catch (err) {
       setError(err.message || "Failed to load queries");
     } finally {
@@ -1624,10 +1623,13 @@ const Query = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this message permanently?")) return;
-    
+
     setDeletingId(id);
     try {
-      const res = await fetch(`http://localhost:8000/api/query/${id}`, { method: "DELETE" });
+      const res = await fetch(
+        `https://eduhawk-server-urpn.onrender.com/api/query/${id}`,
+        { method: "DELETE" },
+      );
       if (!res.ok) throw new Error("Delete failed");
       setData((prev) => prev.filter((r) => r._id !== id));
     } catch (err) {
@@ -1639,7 +1641,8 @@ const Query = () => {
 
   const filtered = data.filter((row) => {
     const q = filterText.toLowerCase();
-    const matchText = !q || 
+    const matchText =
+      !q ||
       (row.name || row.username || "").toLowerCase().includes(q) ||
       row.email?.toLowerCase().includes(q) ||
       row.phone?.toLowerCase().includes(q) ||
@@ -1653,19 +1656,29 @@ const Query = () => {
     {
       name: "#",
       width: "60px",
-      cell: (_, i) => <span className="text-slate-400 font-medium">{i + 1}</span>,
+      cell: (_, i) => (
+        <span className="text-slate-400 font-medium">{i + 1}</span>
+      ),
     },
     {
       name: "Name",
       selector: (r) => r.name || r.username,
       sortable: true,
-      cell: (r) => <span className="font-semibold text-gray-800">{r.name || r.username}</span>,
+      cell: (r) => (
+        <span className="font-semibold text-gray-800">
+          {r.name || r.username}
+        </span>
+      ),
     },
     {
       name: "Email",
       selector: (r) => r.email,
       sortable: true,
-      cell: (r) => <a href={`mailto:${r.email}`} className="text-blue-600 hover:underline">{r.email}</a>,
+      cell: (r) => (
+        <a href={`mailto:${r.email}`} className="text-blue-600 hover:underline">
+          {r.email}
+        </a>
+      ),
     },
     {
       name: "Phone",
@@ -1700,8 +1713,10 @@ const Query = () => {
       width: "140px",
       cell: (r) => (
         <span className="text-sm text-gray-500">
-          {new Date(r.createdAt).toLocaleDateString("en-IN", { 
-            day: "2-digit", month: "short", year: "numeric" 
+          {new Date(r.createdAt).toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
           })}
         </span>
       ),
@@ -1741,7 +1756,9 @@ const Query = () => {
             <FaInbox className="text-indigo-600" />
             Query Messages
           </h1>
-          <p className="text-gray-500 mt-2 text-lg">Manage all event inquiries and queries</p>
+          <p className="text-gray-500 mt-2 text-lg">
+            Manage all event inquiries and queries
+          </p>
         </div>
 
         {/* Event Type Filters */}
@@ -1754,8 +1771,8 @@ const Query = () => {
                 key={type}
                 onClick={() => setFilterEvent(isActive ? "All" : type)}
                 className={`px-5 py-2 rounded-3xl text-sm font-medium border transition-all ${
-                  isActive 
-                    ? "bg-white shadow-sm border-gray-300" 
+                  isActive
+                    ? "bg-white shadow-sm border-gray-300"
                     : "bg-white border-gray-200 hover:border-gray-300"
                 }`}
               >
@@ -1796,7 +1813,11 @@ const Query = () => {
           </button>
 
           <div className="ml-auto text-sm text-gray-500">
-            Showing <span className="font-semibold text-gray-700">{filtered.length}</span> of {data.length}
+            Showing{" "}
+            <span className="font-semibold text-gray-700">
+              {filtered.length}
+            </span>{" "}
+            of {data.length}
           </div>
         </div>
 
@@ -1805,7 +1826,10 @@ const Query = () => {
           {error ? (
             <div className="p-10 text-center text-red-500">
               ⚠️ {error}
-              <button onClick={fetchData} className="mt-4 block mx-auto px-6 py-2 bg-red-600 text-white rounded-2xl">
+              <button
+                onClick={fetchData}
+                className="mt-4 block mx-auto px-6 py-2 bg-red-600 text-white rounded-2xl"
+              >
                 Retry
               </button>
             </div>
@@ -1820,8 +1844,17 @@ const Query = () => {
               pointerOnHover
               onRowClicked={(row) => setSelectedRow(row)}
               customStyles={{
-                headRow: { style: { backgroundColor: "#f8fafc", minHeight: "64px" } },
-                headCells: { style: { fontSize: "13px", fontWeight: "700", color: "#475569", textTransform: "uppercase" } },
+                headRow: {
+                  style: { backgroundColor: "#f8fafc", minHeight: "64px" },
+                },
+                headCells: {
+                  style: {
+                    fontSize: "13px",
+                    fontWeight: "700",
+                    color: "#475569",
+                    textTransform: "uppercase",
+                  },
+                },
                 rows: { style: { minHeight: "72px" } },
               }}
               noDataComponent={
